@@ -1,0 +1,25 @@
+<div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h2>Employee List</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>mobile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+               <td>{{employee.id}}</td>
+               <td>{{employee.name}}</td>
+               <td>{{employee.email}}</td>
+               <td>{{employee.mobile}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

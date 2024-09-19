@@ -1,0 +1,29 @@
+<div class="modal">
+    <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div formGroupName="employee">
+        <div class="form-group">
+          <label for="name">Employee Name:</label>
+          <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input formControlName="email" id="email" type="text" placeholder="Enter email" />
+        </div>
+  
+        <div class="form-group">
+          <label for="mobile">Mobile:</label>
+          <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
+        </div>
+      </div>
+  
+      <div formGroupName="department">
+        <input formControlName="id" type="hidden" />
+      </div>
+  
+      <button type="submit" [disabled]="form.invalid">Submit</button>
+    </form>
+  </div>
+  
