@@ -15,6 +15,13 @@ export class EmployeeService {
     return this.http.get<any[]>(`${this.apiUrl}/${departmentId}`);
   }
   addEmployee(id:number,employee: Employee): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create/{id}`, employee); 
+    return this.http.post(`${this.apiUrl}/create/${id}`, employee); 
+  }
+  getEmployeeById(employeeId: number): Observable<any> {
+    return this.http.get<any>(`/api/employees/${employeeId}`);
+  }
+
+  updateEmployee(employeeId: number, employeeData: any): Observable<any> {
+    return this.http.put(`/api/employees/${employeeId}`, employeeData);
   }
 }

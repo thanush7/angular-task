@@ -1,32 +1,26 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService } from '../../service/employee.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-add-employee-form',
-  templateUrl: './create-form.component.html',
-  styleUrls: ['./create-form.component.css'],
+  selector: 'app-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './create.component.html',
+  styleUrl: './create.component.css'
 })
-export class AddEmployeeFormComponent {
+export class CreateComponent {
   form: FormGroup;
   @Output() employeeAdded = new EventEmitter<any>();
   @Input() departId!: number;
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) {
     this.form = this.fb.group({
-      employee: this.fb.group({
-        name: ['', Validators.required],
-        email: ['', Validators.required],
-        mobile: ['', Validators.required],
-      }),
       department: this.fb.group({
-        id: ['']
-      })
+        name: ['', Validators.required],
+      }),
     });
   }
-  
 
   onSubmit() {
     alert("called submit");
@@ -35,7 +29,6 @@ export class AddEmployeeFormComponent {
     console.log('Department ID:', this.departId);
     if (this.form.valid && this.departId) {
       alert("called submit1");
-      this.form.patchValue({ department: { id: this.departId } });
       this.employeeService.addEmployee(this.departId, this.form.value.employee).subscribe({
         next: (response) => {
           this.employeeAdded.emit(response);

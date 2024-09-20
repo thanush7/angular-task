@@ -17,11 +17,10 @@ import { AddEmployeeFormComponent } from '../component/create-form/create-form.c
 export class HomeComponent {
   departments: Department[] = [];
   constructor(private homeService: HomeService,private http: HttpClient) { }
-  
   selectedDepartmentId: number | undefined;
   showForm: boolean = false; 
   isModalOpen:boolean=false;
-
+  selectedId!:number;
   openEmployeeList(departmentId: number | undefined) {
     this.selectedDepartmentId = departmentId;
     this.isModalOpen=true;
@@ -34,15 +33,15 @@ export class HomeComponent {
     });
   }
 
-  openEmployeeForm(departmentId: number|undefined) {
-    this.selectedDepartmentId = departmentId;
+  openEmployeeForm(departmentId:number) {
+    this.selectedId = departmentId;
     this.showForm = true;
     this.isModalOpen=false;
     // alert("new form")
   }
 
   handleEmployeeAdded(employeeData: any) {
-    console.log('New Employee Data:', employeeData);
+    console.log('Employee added for department:', this.selectedDepartmentId, employeeData);
     this.showForm = false;
   }
   // toggleForm(): void {
