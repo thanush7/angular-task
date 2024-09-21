@@ -1,29 +1,26 @@
-/* src/app/navbar/navbar.component.scss */
 nav {
-    background-color: #333;
-    padding: 1rem;
-  
-    ul {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-  
-    li {
-      a {
-        color: white;
-        text-decoration: none;
-  
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  
-    .active {
-      font-weight: bold;
-    }
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa; /* Light background */
+  border-bottom: 1px solid #ccc; /* Optional border */
+}
+
+nav > div {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #007bff; /* Link color */
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+nav a.active {
+  font-weight: bold; /* Highlight active link */
+  color: #0056b3;
+}
+

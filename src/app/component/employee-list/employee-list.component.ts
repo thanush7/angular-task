@@ -2,13 +2,15 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EmployeeService } from '../../service/employee.service';
 import { CommonModule } from '@angular/common';
 import { AddEmployeeFormComponent } from '../create-form/create-form.component';
+import { FormsModule } from '@angular/forms';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
   standalone: true,
-  imports: [CommonModule,AddEmployeeFormComponent] 
+  imports: [CommonModule,AddEmployeeFormComponent,FormsModule] 
 })
 export class EmployeeListComponent implements OnChanges {
   @Input() departmentId!: number;
@@ -17,6 +19,8 @@ export class EmployeeListComponent implements OnChanges {
   selectedEmployeeId: number | undefined;
   selectedDepartmentId: number | undefined;
   isEditFormVisible: boolean=false;
+
+  
   
 
   constructor(private employeeService: EmployeeService) {}
@@ -48,8 +52,6 @@ export class EmployeeListComponent implements OnChanges {
     this.isEditFormVisible = false;  // Hide the form after updating
   }
 
-
-  
 
   closeModal() {
     this.isModalOpen = false;

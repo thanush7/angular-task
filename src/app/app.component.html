@@ -1,13 +1,16 @@
 <!-- src/app/navbar/navbar.component.html -->
 <nav>
-  <ul>
-    <li>
+  <div>
+    <div>
       <a [routerLink]="['/department']" routerLinkActive="active">Department</a>
-    </li>
-    <li>
+    </div>
+    <div>
       <a [routerLink]="['/addall']" routerLinkActive="active">Add All</a>
-    </li>
-  </ul>
+    </div>
+    <div>
+      <a [routerLink]="['/search']" routerLinkActive="active">Details</a>
+    </div>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
