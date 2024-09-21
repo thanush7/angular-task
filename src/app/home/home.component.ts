@@ -6,11 +6,13 @@ import { Department } from '../models/department.model';
 import { Employee } from '../models/employee.model';
 import { EmployeeListComponent } from '../component/employee-list/employee-list.component';
 import { AddEmployeeFormComponent } from '../component/create-form/create-form.component';
+import { CreateComponent } from '../department/create/create.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,EmployeeListComponent,AddEmployeeFormComponent],
+  imports: [CommonModule,HttpClientModule,EmployeeListComponent,AddEmployeeFormComponent,CreateComponent,RouterLink,RouterOutlet],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,6 +23,8 @@ export class HomeComponent {
   showForm: boolean = false; 
   isModalOpen:boolean=false;
   selectedId!:number;
+  createForm:boolean=false;
+
   openEmployeeList(departmentId: number | undefined) {
     this.selectedDepartmentId = departmentId;
     this.isModalOpen=true;
@@ -31,6 +35,10 @@ export class HomeComponent {
     this.homeService.getEmployees().subscribe((data: Department[]) => {
       this.departments = data;
     });
+  }
+
+  deleteEmployeeList(DepartmentId:number){
+    this.deleteDepartment(DepartmentId);
   }
 
   openEmployeeForm(departmentId:number) {
@@ -44,13 +52,26 @@ export class HomeComponent {
     console.log('Employee added for department:', this.selectedDepartmentId, employeeData);
     this.showForm = false;
   }
-  // toggleForm(): void {
-  //   this.showForm = !this.showForm;
-  // }
 
-  // toggle():void{
-  //   this.isModalOpen= !this.isModalOpen;
-  // }
+  isOpen():void{
+    this.createForm=true;
+  }
+
+  deleteDepartment(departmentId: number) {
+    if (confirm('Are you sure you want to delete this department?')) {
+      this.homeService.deleteDepartment(departmentId).subscribe({
+        next: () => {
+          this.departments = this.departments.filter(department => department.id !== departmentId);
+          console.log('Department deleted:', departmentId);
+        },
+        error: (error) => {
+          console.error('Error deleting department:', error);
+        }
+      });
+    }
+  }
+
+
  
 
 }

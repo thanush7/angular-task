@@ -1,0 +1,85 @@
+.form-container {
+    max-width: 600px;
+    /* margin: 20px auto; */
+    padding: 50px;
+    background-color: #f7f9fc; /* Light background for a softer look */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #4a4e69; /* Darker shade for the heading */
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #22223b; /* A deep navy color for labels */
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #c9d6e3; /* Soft border color */
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #9a8cfc; /* Soft purple on focus */
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #9a8cfc; /* Soft purple background */
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #7a5cbd; /* Darker purple on hover */
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input[type="text"], button {
+        font-size: 14px;
+    }
+}

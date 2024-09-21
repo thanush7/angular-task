@@ -1,0 +1,29 @@
+/* src/app/navbar/navbar.component.scss */
+nav {
+    background-color: #333;
+    padding: 1rem;
+  
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+  
+    li {
+      a {
+        color: white;
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  
+    .active {
+      font-weight: bold;
+    }
+  }
+  

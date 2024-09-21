@@ -1,32 +1,23 @@
-<div class="modal">
-    <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
-  
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div formGroupName="employee">
-        <div class="form-group">
-          <label for="name">Employee Name:</label>
-          <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
-        </div>
-  
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input formControlName="email" id="email" type="text" placeholder="Enter email" />
-        </div>
-  
-        <div class="form-group">
-          <label for="mobile">Mobile:</label>
-          <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
-        </div>
-      </div>
-  
-      <div formGroupName="department">
-        <input formControlName="id" type="hidden" />
-      </div>
-      <div class="how">
-        <button>Add Employee</button>
-        <button type="submit" [disabled]="form.invalid">Submit</button>
-      </div>
-      
-    </form>
-  </div>
-  
+<div class="form-container">
+    <h2>Deparment and Employee </h2>
+
+    <label for="name">Deparment Name</label>
+    <input type="text" name="" id="name" [(ngModel)]="newDepartment.name">
+
+    <div *ngFor="let employee of newDepartment.employees; let i = index" class="form-group">
+        <label for="employee{{ i }}">name</label>
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.name" name="employee[]"
+            placeholder="Employee Name" required>
+        <label for="employee{{ i }}">email</label>
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.email" name="employee[]"
+            placeholder="Enter email" required>
+        <label for="employee-{{ i }}">mobile</label>
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.mobile" name="employee[]"
+            placeholder="Enter mobile" required>
+    </div>
+
+    <button (click)="addEmployee()">Add Employee</button>
+    <button type="submit" (click)="onSubmit(newDepartment)">Submit</button>
+</div>
+<router-outlet>
+</router-outlet>

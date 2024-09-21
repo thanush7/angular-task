@@ -54,4 +54,5 @@ export class EmployeeListComponent implements OnChanges {
   closeModal() {
     this.isModalOpen = false;
   }
+  title = 'frontend';
 }

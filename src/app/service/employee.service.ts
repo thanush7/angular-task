@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../models/employee.model';
+import { Department } from '../models/department.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +25,10 @@ export class EmployeeService {
   updateEmployee(employeeId: number, employeeData: any): Observable<any> {
     return this.http.put(`/api/employees/${employeeId}`, employeeData);
   }
+
+  createDepartementWithEmployee(department:Department):Observable<any>{
+    return this.http.post(`${this.apiUrl}`,department);
+  }
+
+
 }
