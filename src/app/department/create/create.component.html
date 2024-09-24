@@ -1,23 +1,26 @@
 <div class="form-container">
-    <h2>Deparment and Employee </h2>
+    <h2>{{ isEdit ? 'Edit' : 'Create' }} Department and Employees</h2>
 
     <label for="name">Deparment Name</label>
-    <input type="text" name="" id="name" [(ngModel)]="newDepartment.name">
+    <input type="text" name="" id="name" [(ngModel)]="newDepartment.name" placeholder="Enter Department Name">
 
     <div *ngFor="let employee of newDepartment.employees; let i = index" class="form-group">
         <label for="employee{{ i }}">name</label>
-        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.name" name="employee[]"
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.name" name="employeeName{{i}}"
             placeholder="Employee Name" required>
         <label for="employee{{ i }}">email</label>
-        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.email" name="employee[]"
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.email" name="employeeEmail{{i}}"
             placeholder="Enter email" required>
         <label for="employee-{{ i }}">mobile</label>
-        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.mobile" name="employee[]"
+        <input type="text" id="employee-{{ i }}" [(ngModel)]="employee.mobile" name="employeeMobile{{i}}"
             placeholder="Enter mobile" required>
+            <div class="buttons">
+                <button type="button" (click)="removeEmployee(i)">Remove</button>
+                <button (click)="addEmployee()">Add Employee</button>
+            </div>
+        
     </div>
-
-    <button (click)="addEmployee()">Add Employee</button>
-    <button type="submit" (click)="onSubmit(newDepartment)">Submit</button>
+    <button type="submit" (click)="onSubmit(newDepartment)"> {{ isEdit ? 'Update' : 'Submit' }}</button>
 </div>
 <router-outlet>
 </router-outlet>

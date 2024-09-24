@@ -12,5 +12,4 @@ import { SearchService } from './service/search.service';
 })
 export class AppComponent {
   
-
 }

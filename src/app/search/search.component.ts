@@ -3,11 +3,12 @@ import { SearchService } from '../service/search.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink,TableModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
@@ -21,6 +22,7 @@ export class SearchComponent {
   constructor(private searchService:SearchService){}
   ngOnInit(): void {
     this.loadEmployees();
+    this.onSearch();
   }
   loadEmployees() {
     this.searchService.getEmployeesAndDepartment()
@@ -42,13 +44,14 @@ export class SearchComponent {
         
         if (matchingEmployees.length > 0) {
           this.filteredEmployees.push({
-            departmentName: department.name,
+            id:department.id,
+            name: department.name,
             employees: matchingEmployees
           });
         }
       });
     } else {
-      this.filteredEmployees = this.departments; // Reset to original list if search term is empty
+      this.filteredEmployees = this.departments;
     }
   }
   

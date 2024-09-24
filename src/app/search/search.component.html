@@ -1,39 +1,41 @@
 <div class="search-bar">
-    <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" [routerLink]="['/search']" routerLinkActive="active" placeholder="Search employees by name or email" />
-  </div>
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search employees by name or email" />
+</div>
+
 <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Department ID</th>
-          <th>Department Name</th>
-          <th>Employees</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let department of filteredEmployees">
-          <td>{{ department.id }}</td>
-          <td>{{ department.name }}</td>
-          <td>
-            <table>
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Employee Name</th>
-                  <th>Employee Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let employee of department.employees">
-                  <td>{{ employee.id }}</td>
-                  <td>{{ employee.name }}</td>
-                  <td>{{ employee.email }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <p-table [value]="filteredEmployees" class="department-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="department-header">Department ID</th>
+        <th class="department-header">Department Name</th>
+        <th class="department-header">Employees</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-department>
+      <tr>
+        <td>{{ department.id }}</td>
+        <td>{{ department.name }}</td>
+        <td>
+          <!-- Nested table for employees -->
+          <p-table [value]="department.employees" class="employee-table">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="employee-header">Employee ID</th>
+                <th class="employee-header">Employee Name</th>
+                <th class="employee-header">Employee Email</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employee>
+              <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

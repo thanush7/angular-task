@@ -16,22 +16,46 @@ export class CreateComponent {
 
   constructor(private service:EmployeeService){}
 
-  newDepartment: Department = {
+  isEdit = false;
+
+  newDepartment: any = {
     name: '',
-    employees: [],
+    employees: [{ name: '', email: '', mobile: '' }],
   };
 
   onSubmit(Department:any){
-    this.service.createDepartementWithEmployee(Department).subscribe(
+
+    if(this.isEdit){
+      this.service.updateDepartment(Department.id,Department).subscribe({
+        next:()=>{
+          alert("department updated successfully");
+        },
+        error:(error)=>{
+          console.log('error updating department',error);
+        }
+      })
+    }
+    else{
+       this.service.createDepartementWithEmployee(Department).subscribe(
       {
         next:(respone)=>{
           alert("added successfully");
-          this.resetForm();
+          window.location.reload();
         }
         
       }
       
     )
+    }
+
+  }
+
+  loadDepartmentForEdit(departmentId: number) {
+    this.service.getDepartmentById(departmentId).subscribe((data) => {
+      // this.newDepartment = data;
+      this.newDepartment=data;
+      this.isEdit = true;
+    });
   }
 
   resetForm(){
@@ -46,7 +70,10 @@ export class CreateComponent {
   addEmployee() {
     this.newDepartment.employees.push({
       name: '', email: '', mobile: '',
-    })
+    }
+  )
   }
- 
+  removeEmployee(index: number) {
+    this.newDepartment.employees.splice(index, 1);
+  }
 }

@@ -7,26 +7,29 @@ import { Employee } from '../models/employee.model';
 import { EmployeeListComponent } from '../component/employee-list/employee-list.component';
 import { AddEmployeeFormComponent } from '../component/create-form/create-form.component';
 import { CreateComponent } from '../department/create/create.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,EmployeeListComponent,AddEmployeeFormComponent,CreateComponent,RouterLink,RouterOutlet],
+  imports: [CommonModule,HttpClientModule,EmployeeListComponent,AddEmployeeFormComponent,CreateComponent,RouterLink,RouterOutlet,TableModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   departments: Department[] = [];
-  constructor(private homeService: HomeService,private http: HttpClient) { }
+  constructor(private homeService: HomeService,private http: HttpClient,private router:Router) { }
   selectedDepartmentId: number | undefined;
   showForm: boolean = false; 
   isModalOpen:boolean=false;
   selectedId!:number;
   createForm:boolean=false;
+  departmentName="";
 
-  openEmployeeList(departmentId: number | undefined) {
+  openEmployeeList(departmentId: number | undefined,departName:string) {
     this.selectedDepartmentId = departmentId;
+    this.departmentName=departName;
     this.isModalOpen=true;
     this.showForm = false;
   }
@@ -71,7 +74,9 @@ export class HomeComponent {
     }
   }
 
-
+  gotoEdit(departId:number){
+    this.router.navigate(['departments/edit',departId])
+  }
  
 
 }

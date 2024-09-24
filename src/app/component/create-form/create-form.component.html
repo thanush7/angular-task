@@ -1,32 +1,51 @@
 <div class="modal">
-    <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
-  
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div formGroupName="employee">
-        <div class="form-group">
-          <label for="name">Employee Name:</label>
-          <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
-        </div>
-  
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input formControlName="email" id="email" type="text" placeholder="Enter email" />
-        </div>
-  
-        <div class="form-group">
-          <label for="mobile">Mobile:</label>
-          <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
-        </div>
+  <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div formGroupName="employee">
+      <div class="form-group">
+        <label for="name">Employee Name:</label>
+        <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
       </div>
-  
-      <div formGroupName="department">
-        <input formControlName="id" type="hidden" />
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input formControlName="email" id="email" type="text" placeholder="Enter email" />
       </div>
-      <div class="how">
-        <button>Add Employee</button>
-        <button type="submit" [disabled]="form.invalid">Submit</button>
+
+      <div class="form-group">
+        <label for="mobile">Mobile:</label>
+        <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
       </div>
-      
-    </form>
-  </div>
-  
+
+      <div class="radio-group">
+        <label>Gender:</label>
+        <label>
+          <input formControlName="gender" type="radio" value="male" /> Male
+        </label>
+        <label>
+          <input formControlName="gender" type="radio" value="female" /> Female
+        </label>
+      </div>
+
+      <!-- Move city under employee -->
+      <div class="form-group">
+        <label for="city">City:</label>
+        <select formControlName="city" id="city">
+          <option value="" disabled selected>Select a city</option>
+          <option value="coimbatore">coimbatore</option>
+          <option value="chennai">chennai</option>
+          <option value="bangalore">bangalore</option>
+          <option value="mumbai">mumbai</option>
+          <option value="delhi">delhi</option>
+        </select>
+      </div>
+    </div>
+
+    <div formGroupName="department">
+      <input formControlName="id" type="hidden" />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+  </form>
+</div>

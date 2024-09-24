@@ -1,72 +1,113 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
-
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-table {
-  background: #012B39;
-  border-radius: 0.25em;
-  border-collapse: collapse;
-  margin: 1em;
-  width: 400px;
-}
-th {
-  border-bottom: 1px solid #364043;
-  color: #E2B842;
-  font-size: 0.85em;
-  font-weight: 600;
-  padding: 0.5em 1em;
-  text-align: left;
-}
-td {
-  color: #fff;
-  font-weight: 400;
-  padding: 0.65em 1em;
-}
-.disabled td {
-  color: #4F5F64;
-}
-tbody tr {
-  transition: background 0.25s ease;
-}
-tbody tr:hover {
-  background: #014055;
-}
-.container{
-    width: 800px;
-}
-
-/* Modal styles */
-.modal {
-  display: block; /* Change to 'none' to hide */
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background-color: white;
-  margin: 15% auto;
+/* General container styling */
+.whole {
   padding: 20px;
-  border: 1px solid #888;
-  width: 60%;
+  background-color: #f8f9fa; /* Light grey background */
+  display: flex;
+  justify-content: center; /* Center the table */
 }
 
-.close {
-  color: red;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+.table-container {
+  max-height: 300px; /* Set a maximum height for the table */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional: Add a border around the table */
+  margin-top: 10px;  /* Space above the table */
 }
-.whole{
-  display: flex;
-  gap: 30px;
+
+.container {
+  background-color: #fff;  /* White background for the table */
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin-bottom: 20px;
+  width: 80%; /* Set container width */
+  max-width: 900px; /* Maximum width for larger screens */
+  max-height: 300px; /* Set a maximum height for the table */
+  overflow-y: auto;  /* Enable vertical scrolling */
+}
+
+/* Table styling */
+.custom-p-table {
+  width: 100%; /* Table width within the container */
+  border-collapse: collapse;
+}
+
+.table-header th {
+  background-color: #4CAF50; /* Green header background */
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.table-row td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95em;
+}
+
+.table-row:nth-child(even) {
+  background-color: #f2f2f2; /* Alternating row color */
+}
+
+/* Icon styling */
+.table-icon {
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s; /* Smooth hover effect */
+}
+
+.view-icon {
+  color: #007bff; /* Blue color for 'View' */
+}
+
+.add-icon {
+  color: #28a745; /* Green color for 'Add' */
+}
+
+.update-icon {
+  color: #ffc107; /* Yellow color for 'Update' */
+}
+
+.delete-icon {
+  color: #dc3545; /* Red color for 'Delete' */
+}
+
+/* Hover effects */
+.table-icon:hover {
+  transform: scale(1.2); /* Slightly increase icon size on hover */
+}
+
+.view-icon:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+.add-icon:hover {
+  color: #218838; /* Darker green on hover */
+}
+
+.update-icon:hover {
+  color: #e0a800; /* Darker yellow on hover */
+}
+
+.delete-icon:hover {
+  color: #c82333; /* Darker red on hover */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+      width: 95%; /* Take almost full width on smaller screens */
+  }
+
+  .custom-p-table {
+      font-size: 0.85em; /* Slightly smaller font for smaller screens */
+  }
+
+  .table-header th, .table-row td {
+      padding: 8px;
+  }
+
+  .table-icon {
+      font-size: 1em; /* Adjust icon size for mobile */
+  }
 }

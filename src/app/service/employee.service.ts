@@ -19,16 +19,27 @@ export class EmployeeService {
     return this.http.post(`${this.apiUrl}/create/${id}`, employee); 
   }
   getEmployeeById(employeeId: number): Observable<any> {
-    return this.http.get<any>(`/api/employees/${employeeId}`);
+    return this.http.get(`${this.apiUrl}/employees/${employeeId}`);
   }
 
   updateEmployee(employeeId: number, employeeData: any): Observable<any> {
-    return this.http.put(`/api/employees/${employeeId}`, employeeData);
+    return this.http.put(`${this.apiUrl}/${employeeId}`, employeeData);
   }
 
   createDepartementWithEmployee(department:Department):Observable<any>{
-    return this.http.post(`${this.apiUrl}`,department);
+    return this.http.post(`${this.apiUrl}`,department,{ responseType: 'text' });
   }
 
+  updateDepartment(employeeId: number, department: Department) {
+    return this.http.put(`${this.apiUrl}/${department.id}`, department);
+  }
 
+  getDepartmentById(id: number) {
+    return this.http.get(`${this.apiUrl}/departmentId${id}`);
+  }
+
+  deleteDepartment(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`); // Make sure the URL matches your API
+  }
+  
 }

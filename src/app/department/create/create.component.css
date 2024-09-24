@@ -1,6 +1,7 @@
 .form-container {
+
     max-width: 600px;
-    /* margin: 20px auto; */
+    margin: 20px auto;
     padding: 50px;
     background-color: #f7f9fc; /* Light background for a softer look */
     border-radius: 12px;
@@ -82,4 +83,8 @@ button:active {
     input[type="text"], button {
         font-size: 14px;
     }
+}
+.buttons{
+    display: flex;
+    gap: 5px;
 }
