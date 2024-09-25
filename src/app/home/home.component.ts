@@ -13,7 +13,7 @@ import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,EmployeeListComponent,AddEmployeeFormComponent,CreateComponent,RouterLink,RouterOutlet,TableModule],
+  imports: [CommonModule,HttpClientModule,EmployeeListComponent,CreateComponent,RouterLink,RouterOutlet,TableModule,AddEmployeeFormComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

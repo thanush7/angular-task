@@ -28,24 +28,18 @@
         </label>
       </div>
 
-      <!-- Move city under employee -->
       <div class="form-group">
         <label for="city">City:</label>
         <select formControlName="city" id="city">
           <option value="" disabled selected>Select a city</option>
-          <option value="coimbatore">coimbatore</option>
-          <option value="chennai">chennai</option>
-          <option value="bangalore">bangalore</option>
-          <option value="mumbai">mumbai</option>
-          <option value="delhi">delhi</option>
+          <option value="coimbatore">Coimbatore</option>
+          <option value="chennai">Chennai</option>
+          <option value="bangalore">Bangalore</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="delhi">Delhi</option>
         </select>
       </div>
     </div>
-
-    <div formGroupName="department">
-      <input formControlName="id" type="hidden" />
-    </div>
-
     <button type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
   </form>
 </div>

@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService } from '../../service/employee.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Department } from '../../models/department.model';
 
 @Component({
   selector: 'app-add-employee-form',
@@ -16,9 +17,10 @@ export class AddEmployeeFormComponent {
   @Input() employee: any = null;
   @Output() employeeAdded = new EventEmitter<any>();
   @Input() departId!: number;
+  departmentId?:number;
   isEditMode = false
   employeeId!: number
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute,private root:Router) {
     this.form = this.fb.group({
       employee: this.fb.group({
         name: ['', Validators.required],
@@ -27,32 +29,16 @@ export class AddEmployeeFormComponent {
         gender: ['', Validators.required],
         city: ['', Validators.required],
       }),
-
-      department: this.fb.group({
-        id: ['']
-      })
     });
   }
   ngOnInit() {
-    if (this.employee) {
-      this.isEditMode = true;
-      // Directly set form values for the employee
-      this.form.patchValue({
-        employee: {
-          name: this.employee.name || '',
-          email: this.employee.email || '',
-          mobile: this.employee.mobile || '',
-          gender: this.employee.gender || '',
-          city: this.employee.city || '',
-        },
-        department: {
-          id: this.employee.departmentId || '', // Adjust this based on your data structure
-        }
-      });
-    }
-    else {
-      this.employeeId = +this.route.snapshot.paramMap.get('id')!;
+  
+    this.route.params.subscribe(params => {
+      this.employeeId = params['employeeId'];
+    });
       if (this.employeeId) {
+        console.log('inside')
+        console.log(this.departmentId);
         this.isEditMode = true;
         this.employeeService.getEmployeeById(this.employeeId).subscribe((employee: any) => {
          console.log(employee)
@@ -64,13 +50,9 @@ export class AddEmployeeFormComponent {
               gender: employee.gender || '',
               city: employee.city || '',
             },
-            department: {
-              id: employee.departmentId || '', 
-            }
           });
         });
       }
-    }
   }
 
 
@@ -80,7 +62,9 @@ export class AddEmployeeFormComponent {
     console.log('Form controls:', this.form.controls);
     console.log('Department ID:', this.departId);
     if (this.isEditMode) {
-      this.employeeService.updateEmployee(this.employeeId,this.form.value.employee).subscribe(
+      this.employeeService.updateEmployee(this.employeeId,
+        {...this.form.value.employee
+        }).subscribe(
         (res)=>{this.employeeAdded.emit(res);
           alert('updated successfully')
         },error=>{
@@ -99,6 +83,7 @@ export class AddEmployeeFormComponent {
         }
       )
     }
+    this.root.navigate(['/employeelist']);
     this.employeeAdded.emit(null);
   }
 }

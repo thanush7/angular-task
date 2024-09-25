@@ -4,6 +4,7 @@ import { CreateComponent } from './department/create/create.component';
 import { SearchComponent } from './search/search.component';
 import { DepartmenteditComponent } from './departmentedit/departmentedit.component';
 import { AddEmployeeFormComponent } from './component/create-form/create-form.component';
+import { EmployeeListComponent } from './component/employee-list/employee-list.component';
 
 export const routes: Routes = [
     {
@@ -27,7 +28,12 @@ export const routes: Routes = [
         component: DepartmenteditComponent
     },
     {
-        path: 'employee/edit/:id',
+        path: 'employee/edit/:employeeId',
         component: AddEmployeeFormComponent
+    },
+    {
+        path: 'employeelist',
+        component: EmployeeListComponent
     }
+
 ];

@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DepartmenteditService } from './departmentedit.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-departmentedit',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,RouterModule],
   templateUrl: './departmentedit.component.html',
   styleUrl: './departmentedit.component.css'
 })
@@ -18,7 +18,7 @@ export class DepartmenteditComponent {
   isEditMode:boolean=false;
   departmentId!: number;
 
-  constructor(private fb:FormBuilder,private service:DepartmenteditService,private route: ActivatedRoute){}
+  constructor(private fb:FormBuilder,private service:DepartmenteditService,private route: ActivatedRoute,private root:Router){}
 
   ngOnInit(){
     this.initForm();
@@ -88,6 +88,7 @@ export class DepartmenteditComponent {
         }
       );
     }
+    this.root.navigate(['/department'])
     this.closeForm();
   }
 

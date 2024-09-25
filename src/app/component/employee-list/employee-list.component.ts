@@ -96,10 +96,11 @@ export class EmployeeListComponent implements OnChanges {
       });
     }
   }
-  gotoEdit(id:number){
-    this.router.navigate(['employee/edit',id])
+  gotoEdit(id: number) {
+   // console.log('Navigating to edit:', id, deptId);
+    this.router.navigate(['employee/edit', id]);
   }
-
+  
   closeModal() {
     this.isModalOpen = false;
   }
