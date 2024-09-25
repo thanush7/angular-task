@@ -32,7 +32,15 @@ input[type="text"] {
     font-size: 16px;
     transition: border-color 0.3s ease;
 }
-
+select{
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #c9d6e3; /* Soft border color */
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
 input[type="text"]:focus {
     border-color: #9a8cfc; /* Soft purple on focus */
     outline: none;

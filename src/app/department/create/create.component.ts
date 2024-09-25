@@ -4,6 +4,7 @@ import { EmployeeService } from '../../service/employee.service';
 import { CommonModule } from '@angular/common';
 import { Department } from '../../models/department.model';
 import { RouterOutlet } from '@angular/router';
+import { HomeService } from '../../service/home.service';
 
 @Component({
   selector: 'app-create',
@@ -14,14 +15,24 @@ import { RouterOutlet } from '@angular/router';
 })
 export class CreateComponent {
 
-  constructor(private service:EmployeeService){}
+  constructor(private service:EmployeeService,private empService:HomeService){}
 
   isEdit = false;
+  selectedItem?: number;
 
   newDepartment: any = {
     name: '',
     employees: [{ name: '', email: '', mobile: '' }],
   };
+
+  department:Department[]=[];
+
+
+  ngOnInit(){
+    this.empService.getEmployees().subscribe((data: Department[]) => {
+      this.department = data;
+    });;
+  }
 
   onSubmit(Department:any){
 

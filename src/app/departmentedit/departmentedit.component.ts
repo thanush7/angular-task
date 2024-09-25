@@ -93,7 +93,7 @@ export class DepartmenteditComponent {
   }
 
   closeForm(){
-    this.departmentAdded.emit(null);
+    this.root.navigate(['/department'])
   }
 
 }

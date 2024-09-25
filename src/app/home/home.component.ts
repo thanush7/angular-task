@@ -9,11 +9,12 @@ import { AddEmployeeFormComponent } from '../component/create-form/create-form.c
 import { CreateComponent } from '../department/create/create.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,EmployeeListComponent,CreateComponent,RouterLink,RouterOutlet,TableModule,AddEmployeeFormComponent],
+  imports: [CommonModule,HttpClientModule,EmployeeListComponent,CreateComponent,RouterLink,RouterOutlet,TableModule,AddEmployeeFormComponent,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -26,6 +27,9 @@ export class HomeComponent {
   selectedId!:number;
   createForm:boolean=false;
   departmentName="";
+  searchTerm!:string
+  filteredDepartment:Department[]=[];
+  row=5;
 
   openEmployeeList(departmentId: number | undefined,departName:string) {
     this.selectedDepartmentId = departmentId;
@@ -37,9 +41,18 @@ export class HomeComponent {
   ngOnInit(): void {
     this.homeService.getEmployees().subscribe((data: Department[]) => {
       this.departments = data;
+      this.filteredDepartment=data;
     });
   }
-
+  onSearch() {
+    if (this.searchTerm) {
+      this.filteredDepartment = this.departments.filter(emp =>
+        emp.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredDepartment = [...this.departments];
+    }
+  }
   deleteEmployeeList(DepartmentId:number){
     this.deleteDepartment(DepartmentId);
   }

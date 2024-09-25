@@ -2,7 +2,9 @@
     <h2>{{ isEdit ? 'Edit' : 'Create' }} Department and Employees</h2>
 
     <label for="name">Deparment Name</label>
-    <input type="text" name="" id="name" [(ngModel)]="newDepartment.name" placeholder="Enter Department Name">
+    <select [(ngModel)]="selectedItem">
+        <option *ngFor="let item of department" [value]="item.id">{{ item.name }}</option>
+    </select>
 
     <div *ngFor="let employee of newDepartment.employees; let i = index" class="form-group">
         <label for="employee{{ i }}">name</label>

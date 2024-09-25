@@ -21,10 +21,13 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "frontend": "file:",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.10",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {

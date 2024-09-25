@@ -1,6 +1,5 @@
 <div class="modal">
   <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
-
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formGroupName="employee">
       <div class="form-group">

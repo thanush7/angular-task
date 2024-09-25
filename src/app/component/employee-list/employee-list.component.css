@@ -106,3 +106,21 @@
       font-size: 1em; /* Adjust icon size for mobile */
   }
 }
+.search-container input{
+  width: 250px;
+  padding: 5px;
+  
+}
+.close {
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff4d4d;
+}

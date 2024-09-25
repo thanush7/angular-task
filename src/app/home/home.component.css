@@ -3,7 +3,8 @@
   padding: 20px;
   background-color: #f8f9fa; /* Light grey background */
   display: flex;
-  justify-content: center; /* Center the table */
+  gap: 10px;
+  justify-content: start; /* Center the table */
 }
 
 .table-container {
@@ -23,12 +24,16 @@
   max-width: 900px; /* Maximum width for larger screens */
   max-height: 300px; /* Set a maximum height for the table */
   overflow-y: auto;  /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Table styling */
 .custom-p-table {
   width: 100%; /* Table width within the container */
   border-collapse: collapse;
+  justify-content: center;
 }
 
 .table-header th {
@@ -110,4 +115,8 @@
   .table-icon {
       font-size: 1em; /* Adjust icon size for mobile */
   }
+}
+.search-container input{
+  width: 250px;
+  padding: 5px;
 }

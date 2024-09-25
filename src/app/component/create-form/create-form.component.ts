@@ -18,8 +18,10 @@ export class AddEmployeeFormComponent {
   @Output() employeeAdded = new EventEmitter<any>();
   @Input() departId!: number;
   departmentId?:number;
-  isEditMode = false
-  employeeId!: number
+  isEditMode = false;
+  employeeId!: number;
+
+  
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute,private root:Router) {
     this.form = this.fb.group({
       employee: this.fb.group({

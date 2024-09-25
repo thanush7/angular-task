@@ -1,8 +1,11 @@
 <div class="search-bar">
   <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search employees by name or email" />
 </div>
-
-<div class="table-container">
+<div class="buttons">
+  <button (click)="exportToExcel()" class="download-button">Download Excel</button>
+  <button (click)="downloadPDF()" class="download-button">Download PDF</button>
+</div>
+<div id="pdfTable" class="table-container">
   <p-table [value]="filteredEmployees" class="department-table">
     <ng-template pTemplate="header">
       <tr>

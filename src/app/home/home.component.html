@@ -1,7 +1,11 @@
 <div class="whole">
-
+    
+  
     <div class="container">
-        <p-table [value]="departments" class="custom-p-table ">
+        <div class="search-container">
+            <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search"/>
+          </div>
+        <p-table [value]="filteredDepartment" class="custom-p-table " [paginator]="true" [rows]="row" [totalRecords]="filteredDepartment.length"> 
             <ng-template pTemplate="header">
                 <tr class="table-header">
                     <th>Id</th>

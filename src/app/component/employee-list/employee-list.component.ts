@@ -26,7 +26,7 @@ export class EmployeeListComponent implements OnChanges {
   selectedDepartmentId: number | undefined;
   isEditFormVisible: boolean=false;
 
-  rows = 4;
+  rows = 5;
 
   filteredEmployees:Employee[]=[];
 
@@ -103,6 +103,7 @@ export class EmployeeListComponent implements OnChanges {
   
   closeModal() {
     this.isModalOpen = false;
+    this.router.navigate(['/department']);
   }
   title = 'frontend';
 }
