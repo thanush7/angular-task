@@ -32,8 +32,16 @@ export const routes: Routes = [
         component: AddEmployeeFormComponent
     },
     {
-        path: 'employeelist',
-        component: EmployeeListComponent
+        path:'employeeList/:id',
+        component:EmployeeListComponent
+    }
+    ,{
+      path:'employeeList',
+      component:HomeComponent
+    }
+    ,{
+        path:'create/:id',
+        component:AddEmployeeFormComponent
     }
 
 ];

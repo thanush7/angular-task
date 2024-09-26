@@ -10,6 +10,7 @@ import { CreateComponent } from '../department/create/create.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -31,12 +32,12 @@ export class HomeComponent {
   filteredDepartment:Department[]=[];
   row=5;
 
-  openEmployeeList(departmentId: number | undefined,departName:string) {
-    this.selectedDepartmentId = departmentId;
-    this.departmentName=departName;
-    this.isModalOpen=true;
-    this.showForm = false;
-  }
+  // openEmployeeList(departmentId: number | undefined,departName:string) {
+  //   this.selectedDepartmentId = departmentId;
+  //   this.departmentName=departName;
+  //   this.isModalOpen=true;
+  //   this.showForm = false;
+  // }
 
   ngOnInit(): void {
     this.homeService.getEmployees().subscribe((data: Department[]) => {
@@ -62,6 +63,7 @@ export class HomeComponent {
     this.showForm = true;
     this.isModalOpen=false;
     // alert("new form")
+    this.router.navigate(['/create',departmentId]);
   }
 
   handleEmployeeAdded(employeeData: any) {
@@ -73,23 +75,57 @@ export class HomeComponent {
     this.createForm=true;
   }
 
+  // deleteDepartment(departmentId: number) {
+  //   if (confirm('Are you sure you want to delete this department?')) {
+  //     this.homeService.deleteDepartment(departmentId).subscribe({
+  //       next: () => {
+  //         this.departments = this.departments.filter(department => department.id !== departmentId);
+  //         console.log('Department deleted:', departmentId);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error deleting department:', error);
+  //       }
+  //     });
+  //   }
+  // }
   deleteDepartment(departmentId: number) {
-    if (confirm('Are you sure you want to delete this department?')) {
-      this.homeService.deleteDepartment(departmentId).subscribe({
-        next: () => {
-          this.departments = this.departments.filter(department => department.id !== departmentId);
-          console.log('Department deleted:', departmentId);
-        },
-        error: (error) => {
-          console.error('Error deleting department:', error);
-        }
-      });
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.homeService.deleteDepartment(departmentId).subscribe({
+          next: () => {
+            this.departments = this.departments.filter(department => department.id !== departmentId);
+            console.log('Department deleted:', departmentId);
+          },
+          error: (error) => {
+            console.error('Error deleting department:', error);
+          }
+        });
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    });
   }
 
   gotoEdit(departId:number){
     this.router.navigate(['departments/edit',departId])
   }
+
+  openEmployeeList(departId: number) {
+    this.router.navigate(['/employeeList', departId]);
+}
+
+
  
 
 }

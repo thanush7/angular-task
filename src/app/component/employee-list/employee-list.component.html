@@ -44,11 +44,12 @@
   </div>
 </div> -->
 
-<div *ngIf="isModalOpen">
-  <span class="close" (click)="closeModal()">&times;</span>
+<div class="whole">
+  <!-- <span class="close" (click)="closeModal()">&times;</span> -->
+ 
+   
   <div class="container">
-    <h2>{{departName}}</h2>
-    
+    <h1>{{departName}}</h1>
     <!-- Search Input -->
     <div class="search-container">
       <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search"/>
@@ -91,6 +92,10 @@
         </ng-template>
 
       </p-table>
+
     </div>
+    <div class="button-container">
+      <button (click)="closeModal()">Back</button>
+     </div>
   </div>
 </div>

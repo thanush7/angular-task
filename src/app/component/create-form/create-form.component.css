@@ -122,3 +122,12 @@
   .form-group select{
     height: 30px;
   }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+  .buttons{
+    display: flex;
+    gap: 10px;
+  }

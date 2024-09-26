@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DepartmenteditService } from './departmentedit.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-departmentedit',
@@ -28,10 +29,9 @@ export class DepartmenteditComponent {
       this.isEditMode = true;
       this.service.getDeparmentById(this.departmentId)
       .subscribe((department: any) => {
-        // alert('inside')
         this.form.patchValue({
           department: {
-            name: department.name // Bind to the nested department group
+            name: department.name 
           }
       });
         
@@ -53,19 +53,36 @@ export class DepartmenteditComponent {
   //   this.form.patchValue({name:department.name||''}
   //   )
   // }
-
-
+  showSuccessAlert() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'department added successful',
+      showConfirmButton: false,
+      timer: 4000
+    });
+  }
+  showSuccessUpdate() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'department Updated successful',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
   onSubmit(){
-   alert('called 1')
+  //  alert('called 1')
     if(this.isEditMode){
-      alert('called 2')
+      // alert('called 2')
       const updatedDepartment={
         id: this.departmentId,
         ...this.form.value.department
       };
       this.service.updateDeparment(updatedDepartment.id,updatedDepartment).subscribe((res)=>{
         this.departmentAdded.emit(res); // Emit the new department to parent component
-        console.log('Department updated successfully', res);
+        // console.log('Department updated successfully', res);
+        this.showSuccessUpdate();
         this.closeForm();
       },
       (error) => {
@@ -74,12 +91,13 @@ export class DepartmenteditComponent {
       });
     }
     else{
-      alert('called 3')
+      // alert('called 3')
       const newDepartment={...this.form.value.department};
       this.service.addDepartment(newDepartment).subscribe(
         (response) => {
           // Handle success response
           this.departmentAdded.emit(response); // Emit the new department to parent component
+          this.showSuccessAlert();
           this.closeForm();
         },
         (error) => {

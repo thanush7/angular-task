@@ -21,10 +21,10 @@
                     <td>{{ department.id }}</td>
                     <td>{{ department.name }}</td>
                     <td>
-                        <i class="pi pi-eye table-icon view-icon" (click)="openEmployeeList(department.id,department.name)"></i>
+                        <i class="pi pi-eye table-icon view-icon" (click)="openEmployeeList(department.id)" [routerLink]="['/employeeList']"></i>
                     </td>
                     <td>
-                        <i class="pi pi-user-plus table-icon add-icon" (click)="department.id !== undefined ? openEmployeeForm(department.id) : null"></i>
+                        <i class="pi pi-user-plus table-icon add-icon" (click)="department.id !== undefined ? openEmployeeForm(department.id) : null" [routerLink]="['/create']"></i>
                     </td>
                     <td>
                         <i class="pi pi-cog table-icon update-icon" (click)="gotoEdit(department.id)"></i>
@@ -37,11 +37,11 @@
         </p-table>
     </div>
 
-    <app-add-employee-form *ngIf="showForm" [departId]="selectedId" (employeeAdded)="handleEmployeeAdded($event)">
-    </app-add-employee-form>
-
-    <app-employee-list *ngIf="selectedDepartmentId && !showForm" [departmentId]="selectedDepartmentId" [departName]="departmentName">
-    </app-employee-list>
+    <!-- <app-add-employee-form *ngIf="showForm" [departId]="selectedId" (employeeAdded)="handleEmployeeAdded($event)">
+    </app-add-employee-form> -->
+<!-- 
+    <app-employee-list *ngIf="selectedDepartmentId" [departmentId]="selectedDepartmentId" [departName]="departmentName">
+    </app-employee-list> -->
 
 </div>
 <router-outlet></router-outlet>

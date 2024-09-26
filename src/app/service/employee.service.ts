@@ -41,5 +41,9 @@ export class EmployeeService {
   deleteDepartment(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`); // Make sure the URL matches your API
   }
+  getDepartmentName(id:number): Observable<{ name: string }> {
+    console.log(this.http.get<string>(`${this.apiUrl}/dep/${id}`));
+    return this.http.get<{ name: string }>(`${this.apiUrl}/dep/${id}`);
+  }
   
 }

@@ -5,7 +5,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
   margin-bottom: 20px;
   width: 100%; /* Set container width */
-  max-width: 1200px; /* Maximum width for larger screens */
+  max-width: 100%; /* Maximum width for larger screens */
 
 }
 .table-container {
@@ -123,4 +123,43 @@
 
 .close:hover {
   color: #ff4d4d;
+}
+.button-container{
+  display: flex;
+  justify-content: end;
+  margin-right: 120px;
+}
+
+
+/* button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.whole{
+  display: flex;
+  justify-content: center;
 }

@@ -1,20 +1,29 @@
 <div class="modal">
-  <span class="close" (click)="employeeAdded.emit(null)">&times;</span> <!-- Close the form -->
+  <span class="close" (click)="back()">&times;</span>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formGroupName="employee">
       <div class="form-group">
         <label for="name">Employee Name:</label>
         <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
+        <div *ngIf="form.get('employee.name')?.invalid && form.get('employee.name')?.touched" class="error-message">
+          Employee name is required.
+        </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email:</label>
         <input formControlName="email" id="email" type="text" placeholder="Enter email" />
+        <div *ngIf="form.get('employee.email')?.invalid && form.get('employee.email')?.touched" class="error-message">
+          Enter a valid email.
+        </div>
       </div>
 
       <div class="form-group">
         <label for="mobile">Mobile:</label>
         <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
+        <div *ngIf="form.get('employee.mobile')?.invalid && form.get('employee.mobile')?.touched" class="error-message">
+          Enter a valid 10-digit mobile number.
+        </div>
       </div>
 
       <div class="radio-group">
@@ -25,6 +34,9 @@
         <label>
           <input formControlName="gender" type="radio" value="female" /> Female
         </label>
+        <div *ngIf="form.get('employee.gender')?.invalid && form.get('employee.gender')?.touched" class="error-message">
+          Select gender.
+        </div>
       </div>
 
       <div class="form-group">
@@ -37,8 +49,13 @@
           <option value="mumbai">Mumbai</option>
           <option value="delhi">Delhi</option>
         </select>
+        <div *ngIf="form.get('employee.city')?.invalid && form.get('employee.city')?.touched" class="error-message">
+          Select a city.
+        </div>
       </div>
     </div>
-    <button type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+    <div class="buttons">
+      <button type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+    </div>
   </form>
 </div>

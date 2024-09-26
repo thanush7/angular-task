@@ -30,6 +30,7 @@ export class SearchComponent {
     this.searchService.getEmployeesAndDepartment()
       .subscribe(data => {
         this.departments = data;
+        this.filteredEmployees=data;
       });
   }
   downloadPDF() {
@@ -79,7 +80,7 @@ export class SearchComponent {
   }
 
   onSearch() {
-    this.loadEmployees();
+    // this.loadEmployees();
     if (this.searchTerm) {
       this.filteredEmployees = [];
   
