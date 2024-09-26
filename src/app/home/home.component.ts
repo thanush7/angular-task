@@ -22,10 +22,10 @@ import Swal from 'sweetalert2';
 export class HomeComponent {
   departments: Department[] = [];
   constructor(private homeService: HomeService,private http: HttpClient,private router:Router) { }
-  selectedDepartmentId: number | undefined;
+  selectedDepartmentId: FunctionStringCallback | undefined;
   showForm: boolean = false; 
   isModalOpen:boolean=false;
-  selectedId!:number;
+  selectedId!:string;
   createForm:boolean=false;
   departmentName="";
   searchTerm!:string
@@ -54,11 +54,11 @@ export class HomeComponent {
       this.filteredDepartment = [...this.departments];
     }
   }
-  deleteEmployeeList(DepartmentId:number){
+  deleteEmployeeList(DepartmentId:string){
     this.deleteDepartment(DepartmentId);
   }
 
-  openEmployeeForm(departmentId:number) {
+  openEmployeeForm(departmentId:string) {
     this.selectedId = departmentId;
     this.showForm = true;
     this.isModalOpen=false;
@@ -88,7 +88,7 @@ export class HomeComponent {
   //     });
   //   }
   // }
-  deleteDepartment(departmentId: number) {
+  deleteDepartment(departmentId: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -101,7 +101,9 @@ export class HomeComponent {
       if (result.isConfirmed) {
         this.homeService.deleteDepartment(departmentId).subscribe({
           next: () => {
-            this.departments = this.departments.filter(department => department.id !== departmentId);
+            // this.departments = this.departments.filter(department => (department.id).trim().toLowerCase() !== departmentId);
+            this.departments = this.departments.filter(department => department.id?.trim().toLowerCase() !== departmentId.trim().toLowerCase());
+
             console.log('Department deleted:', departmentId);
           },
           error: (error) => {

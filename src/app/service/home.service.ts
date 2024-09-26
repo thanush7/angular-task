@@ -15,7 +15,7 @@ export class HomeService {
   getEmployees(): Observable<Department[]> {
     return this.http.get<Department[]>(`${this.apiUrl}/allDepartment`);
   }
-  deleteDepartment(id: number): Observable<any> {
+  deleteDepartment(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/department/${id}`); // Make sure the URL matches your API
   }
 }

@@ -24,13 +24,13 @@ import { Department } from '../../models/department.model';
 })
 export class EmployeeListComponent implements OnChanges {
   // @Input() departmentId!: number;
-  departmentId!: number;
+  departmentId!: string;
   // @Input() departName:string | undefined;
   departName!:string;
   employees: any[] = [];
   @Input() isModalOpen: boolean = false;
-  selectedEmployeeId: number | undefined;
-  selectedDepartmentId: number | undefined;
+  selectedEmployeeId: string | undefined;
+  selectedDepartmentId: string | undefined;
   isEditFormVisible: boolean = false;
   @Output() employeeAdded = new EventEmitter<any>();
 
@@ -42,7 +42,7 @@ export class EmployeeListComponent implements OnChanges {
   departments: Department[] = [];
 
   ngOnInit() {
-    this.departmentId =+ this.root.snapshot.paramMap.get('id')!;
+    this.departmentId = this.root.snapshot.paramMap.get('id')!;
     this.loadEmployees();
   
     // this.departName=departments[name];
@@ -101,7 +101,7 @@ export class EmployeeListComponent implements OnChanges {
     
   }
 
-  editEmployee(employeeId: number, departId: number) {
+  editEmployee(employeeId: string, departId: string) {
     this.selectedEmployeeId = employeeId;
     this.selectedDepartmentId = departId;
     this.isEditFormVisible = true; // Show the form when an employee is selected
@@ -113,7 +113,7 @@ export class EmployeeListComponent implements OnChanges {
     this.loadEmployees();
     this.isEditFormVisible = false;  // Hide the form after updating
   }
-  deleteEmployeeList(employeeId: number) {
+  deleteEmployeeList(employeeId: string) {
     this.deleteEmployee(employeeId);
   }
   // deleteEmployee(departmentId: number) {
@@ -133,7 +133,7 @@ export class EmployeeListComponent implements OnChanges {
     // console.log('Navigating to edit:', id, deptId);
     this.router.navigate(['employee/edit', id]);
   }
-  deleteEmployee(departmentId: number) {
+  deleteEmployee(departmentId: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

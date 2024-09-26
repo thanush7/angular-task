@@ -16,10 +16,10 @@ export class AddEmployeeFormComponent {
   form: FormGroup;
   @Input() employee: any = null;
   @Output() employeeAdded = new EventEmitter<any>();
-  departId!: number;
+  departId!: string;
   departmentId?: number;
   isEditMode = false;
-  employeeId!: number;
+  employeeId!: string;
 
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute, private root: Router) {

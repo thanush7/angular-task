@@ -18,7 +18,7 @@ export class CreateComponent {
   constructor(private service:EmployeeService,private empService:HomeService){}
 
   isEdit = false;
-  selectedItem?: number;
+  selectedItem?: string;
 
   newDepartment: any = {
     name: '',
@@ -61,7 +61,7 @@ export class CreateComponent {
 
   }
 
-  loadDepartmentForEdit(departmentId: number) {
+  loadDepartmentForEdit(departmentId: string) {
     this.service.getDepartmentById(departmentId).subscribe((data) => {
       // this.newDepartment = data;
       this.newDepartment=data;
