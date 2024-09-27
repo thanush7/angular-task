@@ -31,6 +31,8 @@ export class HomeComponent {
   searchTerm!:string
   filteredDepartment:Department[]=[];
   row=5;
+  totalRecords:number=0;
+  loading:boolean=false;
 
   // openEmployeeList(departmentId: number | undefined,departName:string) {
   //   this.selectedDepartmentId = departmentId;
@@ -40,10 +42,11 @@ export class HomeComponent {
   // }
 
   ngOnInit(): void {
-    this.homeService.getEmployees().subscribe((data: Department[]) => {
-      this.departments = data;
-      this.filteredDepartment=data;
-    });
+    // this.homeService.getEmployees().subscribe((data: Department[]) => {
+    //   this.departments = data;
+    //   this.filteredDepartment=data;
+    // });
+    this.loadDepartment(0,4);
   }
   onSearch() {
     if (this.searchTerm) {
@@ -53,6 +56,22 @@ export class HomeComponent {
     } else {
       this.filteredDepartment = [...this.departments];
     }
+  }
+  loadDepartment(page: number, size: number){
+    this.loading = true;
+    this.homeService.getEmployees(page, size)
+      .subscribe((data:any) => {
+        this.departments = data.content;
+        this.filteredDepartment = data.content;
+        this.totalRecords = data.totalElements;
+        console.log(data);
+        this.loading = false;
+      });
+  }
+  onPageChange(event: any): void {
+    const page = event.first / event.rows; // Calculate the current page
+    const size = event.rows; // Get the number of records per page
+    this.loadDepartment(page, size);
   }
   deleteEmployeeList(DepartmentId:string){
     this.deleteDepartment(DepartmentId);
@@ -75,19 +94,6 @@ export class HomeComponent {
     this.createForm=true;
   }
 
-  // deleteDepartment(departmentId: number) {
-  //   if (confirm('Are you sure you want to delete this department?')) {
-  //     this.homeService.deleteDepartment(departmentId).subscribe({
-  //       next: () => {
-  //         this.departments = this.departments.filter(department => department.id !== departmentId);
-  //         console.log('Department deleted:', departmentId);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error deleting department:', error);
-  //       }
-  //     });
-  //   }
-  // }
   deleteDepartment(departmentId: string) {
     Swal.fire({
       title: 'Are you sure?',
@@ -126,8 +132,5 @@ export class HomeComponent {
   openEmployeeList(departId: number) {
     this.router.navigate(['/employeeList', departId]);
 }
-
-
- 
 
 }

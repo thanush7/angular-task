@@ -1,7 +1,5 @@
-
-
 export class Employee {
-    id?:string | undefined;
+    id?:string;
     name:string | undefined;
     email:string | undefined;
     mobile:string | undefined;

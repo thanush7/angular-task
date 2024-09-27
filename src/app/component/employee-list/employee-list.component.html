@@ -1,67 +1,15 @@
-<!-- <div *ngIf="isModalOpen">
-  <div class="container">
-    <h2>{{departName}}</h2>
-    <div class="search-container">
-      <input type="text" pInputText placeholder="Search by Name, Email, or City" (input)="onSearch($event)" />
-    </div>
-
-    <div class="table-container">
-      <p-table [value]="employees" [paginator]="true" 
-      [rows]="rows" 
-      
-       class="custom-p-table p-datatable-responsive">
-        <ng-template pTemplate="header">
-          <tr class="table-header">
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>City</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
-        </ng-template>
-    
-          <ng-template pTemplate="body" let-employee>
-            <tr class="table-row">
-              <td>{{employee.id}}</td>
-              <td>{{employee.name}}</td>
-              <td>{{employee.email}}</td>
-              <td>{{employee.gender}}</td>
-              <td>{{employee.city}}</td>
-              <td>
-                <i class="pi pi-cog table-icon update-icon"></i>
-              </td>
-              <td>
-                <i class="pi pi-trash table-icon delete-icon" (click)="deleteEmployeeList(employee.id)"></i>
-              </td>
-            </tr>
-          </ng-template>
-        
-
-      </p-table>
-    </div>
-  </div>
-</div> -->
-
 <div class="whole">
   <!-- <span class="close" (click)="closeModal()">&times;</span> -->
- 
-   
   <div class="container">
     <h1>{{departName}}</h1>
     <!-- Search Input -->
     <div class="search-container">
-      <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search"/>
+      <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search" />
     </div>
 
     <div class="table-container">
-      <p-table 
-        [value]="filteredEmployees" 
-        [paginator]="true" 
-        [rows]="rows" 
-        [totalRecords]="filteredEmployees.length" 
-        class="custom-p-table p-datatable-responsive">
+      <p-table [value]="filteredEmployees" [totalRecords]="totalRecords" [lazy]="true" [paginator]="true"   [rows]="4"
+        (onLazyLoad)="onPageChange($event)" [loading]="loading" class="custom-p-table p-datatable-responsive">
 
         <ng-template pTemplate="header">
           <tr class="table-header">
@@ -96,6 +44,6 @@
     </div>
     <div class="button-container">
       <button (click)="closeModal()">Back</button>
-     </div>
+    </div>
   </div>
 </div>

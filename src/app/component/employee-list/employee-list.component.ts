@@ -35,20 +35,16 @@ export class EmployeeListComponent implements OnChanges {
   @Output() employeeAdded = new EventEmitter<any>();
 
   rows = 5;
+  totalRecords: number = 0;
 
   filteredEmployees: Employee[] = [];
-
+  loading: boolean = true;
   searchTerm: string = '';
   departments: Department[] = [];
 
   ngOnInit() {
     this.departmentId = this.root.snapshot.paramMap.get('id')!;
-    this.loadEmployees();
-  
-    // this.departName=departments[name];
-   
-    console.log(this.departName);
-
+    this.loadEmployees(0,4);
   }
 
   onSearch() {
@@ -70,18 +66,27 @@ export class EmployeeListComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['departmentId'] && this.departmentId) {
-      this.loadEmployees();
+      // this.loadEmployees(0,this.rows);
       // this.loadDepartment();
     }
   }
 
-  loadEmployees() {
+  loadEmployees(page: number, size: number) {
     this.loadDepartment();
-    this.employeeService.getEmployeesByDepartment(this.departmentId)
-      .subscribe(data => {
-        this.employees = data;
-        this.filteredEmployees = data;
+    this.loading = true;
+    this.employeeService.getEmployeesByDepartment(this.departmentId,page, size)
+      .subscribe((data:any) => {
+        this.employees = data.content;
+        this.filteredEmployees = data.content;
+        this.totalRecords = data.totalElements;
+        console.log(data);
+        this.loading = false;
       });
+  }
+  onPageChange(event: any): void {
+    const page = event.first / event.rows; // Calculate the current page
+    const size = event.rows; // Get the number of records per page
+    this.loadEmployees(page, size);
   }
   loadDepartment()
   {
@@ -95,6 +100,7 @@ export class EmployeeListComponent implements OnChanges {
         },
         (error)=>{
           this.departName='';
+
         }
        )
     }
@@ -110,25 +116,13 @@ export class EmployeeListComponent implements OnChanges {
   onEmployeeUpdated(updatedEmployee: any) {
     console.log('Employee updated:', updatedEmployee);
     // Refresh the employee list or update the view
-    this.loadEmployees();
+    this.loadEmployees(0,4);
     this.isEditFormVisible = false;  // Hide the form after updating
   }
   deleteEmployeeList(employeeId: string) {
     this.deleteEmployee(employeeId);
   }
-  // deleteEmployee(departmentId: number) {
-  //   if (confirm('Are you sure you want to delete this department?')) {
-  //     this.employeeService.deleteDepartment(departmentId).subscribe({
-  //       next: () => {
-  //         this.employees = this.employees.filter(employee => employee.id !== departmentId);
-  //         console.log('Employee deleted:', departmentId);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error deleting department:', error);
-  //       }
-  //     });
-  //   }
-  // }
+
   gotoEdit(id: number) {
     // console.log('Navigating to edit:', id, deptId);
     this.router.navigate(['employee/edit', id]);
@@ -147,7 +141,7 @@ export class EmployeeListComponent implements OnChanges {
         this.employeeService.deleteDepartment(departmentId).subscribe({
           next: () => {
             this.employees = this.employees.filter(employee => employee.id !== departmentId);
-            this.loadEmployees();
+            this.loadEmployees(0,4);
           },
           error: (error) => {
             console.error('Error deleting department:', error);

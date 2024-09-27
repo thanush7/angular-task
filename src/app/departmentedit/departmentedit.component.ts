@@ -17,20 +17,21 @@ export class DepartmenteditComponent {
   @Output() departmentAdded=new EventEmitter<any>();
   form!:FormGroup;
   isEditMode:boolean=false;
-  departmentId!: number;
+  departmentId!: string;
 
   constructor(private fb:FormBuilder,private service:DepartmenteditService,private route: ActivatedRoute,private root:Router){}
 
   ngOnInit(){
     this.initForm();
-    this.departmentId = +this.route.snapshot.paramMap.get('id')!;
-    
+    this.departmentId = this.route.snapshot.paramMap.get('id')!;
+    console.log(this.departmentId);
     if(this.departmentId){
       this.isEditMode = true;
       this.service.getDeparmentById(this.departmentId)
       .subscribe((department: any) => {
         this.form.patchValue({
           department: {
+            id:department.id,
             name: department.name 
           }
       });
@@ -44,6 +45,7 @@ export class DepartmenteditComponent {
   initForm(){
     this.form=this.fb.group({
       department:this.fb.group({
+        id:['',Validators.required],
         name:['',Validators.required],
       })
     })
@@ -106,7 +108,7 @@ export class DepartmenteditComponent {
         }
       );
     }
-    this.root.navigate(['/department'])
+    
     this.closeForm();
   }
 

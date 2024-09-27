@@ -19,6 +19,20 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div formGroupName="department">
         <div class="form-group">
+          <label for="name">Department Code:</label>
+          <input 
+            id="id" 
+            formControlName="id" 
+            type="text" 
+            placeholder="Enter Department Code" 
+            [ngClass]="{'is-invalid': form.get('department.id')?.invalid && (form.get('department.id')?.touched || form.get('department.id')?.dirty)}"
+            [readonly]="isEditMode"
+          />
+          <div *ngIf="form.get('department.name')?.invalid && (form.get('department.name')?.touched || form.get('department.name')?.dirty)" class="invalid-feedback">
+            Department code is required.
+          </div>
+        </div>
+        <div class="form-group">
           <label for="name">Department Name:</label>
           <input 
             id="name" 
@@ -31,6 +45,7 @@
             Department name is required.
           </div>
         </div>
+        
       </div>
 
       <button type="submit" [disabled]="form.invalid">{{isEditMode ? 'Update' : 'Submit'}}</button>

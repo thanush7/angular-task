@@ -4,20 +4,22 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { EmployeeService } from '../../service/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { EmailValidatorDirective } from '../../validators/email-validator.directive';
+import { MobileValidatorDirective } from '../../validators/mobile-validator.directive';
 
 @Component({
   selector: 'app-add-employee-form',
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule,EmailValidatorDirective,MobileValidatorDirective]
 })
 export class AddEmployeeFormComponent {
   form: FormGroup;
   @Input() employee: any = null;
   @Output() employeeAdded = new EventEmitter<any>();
   departId!: string;
-  departmentId?: number;
+  departmentId?: string;
   isEditMode = false;
   employeeId!: string;
 
@@ -25,8 +27,9 @@ export class AddEmployeeFormComponent {
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private route: ActivatedRoute, private root: Router) {
     this.form = this.fb.group({
       employee: this.fb.group({
+        id:['',Validators.required],
         name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]], // Email validator
+        email: ['', Validators.required], // Email validator
         mobile: ['', Validators.required],
         gender: ['', Validators.required],
         city: ['', Validators.required],
@@ -47,6 +50,7 @@ export class AddEmployeeFormComponent {
       this.employeeService.getEmployeeById(this.employeeId).subscribe((employee: any) => {
         this.form.patchValue({
           employee: {
+            id:this.employeeId,
             name: employee.name || '',
             email: employee.email || '',
             mobile: employee.mobile || '',
@@ -55,6 +59,7 @@ export class AddEmployeeFormComponent {
           },
         });
       });
+      // console.log(employee)
     }
 
   }
@@ -87,7 +92,7 @@ export class AddEmployeeFormComponent {
           (res) => {
             // this.employeeAdded.emit(res);
             this.showSuccessUpdate()
-            // this.root.navigate(['/employeelist']);
+            this.root.navigate(['/employeelist']);
           }, error => {
             console.error('error', error);
           }
@@ -97,7 +102,8 @@ export class AddEmployeeFormComponent {
     else {
       this.employeeService.addEmployee(this.departId, this.form.value.employee).subscribe(
         (res) => {
-          this.employeeAdded.emit(res);
+          // alert('called1');
+          // this.employeeAdded.emit(res);
           // console.log('added succes',res);
           this.showSuccessAlert();
           // this.root.navigate(['/employeelist']);

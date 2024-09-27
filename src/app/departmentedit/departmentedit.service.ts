@@ -14,10 +14,10 @@ export class DepartmenteditService {
   addDepartment(deparment: Department): Observable<any> {
     return this.http.post(`${this.apiUrl}/create/department`, deparment); 
   }
-  updateDeparment(id:number,deparment:Department):Observable<any>{
+  updateDeparment(id:string,deparment:Department):Observable<any>{
     return this.http.put(`${this.apiUrl}/deparmart/${id}`,deparment);
   }
-  getDeparmentById(id:number):Observable<any>{
+  getDeparmentById(id:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/departmentId/${id}`);
   }
 }

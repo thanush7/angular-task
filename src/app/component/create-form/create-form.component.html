@@ -3,6 +3,13 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formGroupName="employee">
       <div class="form-group">
+        <label for="name">Employee Code:</label>
+        <input formControlName="id" id="id" type="text" placeholder="Enter employee Code" />
+        <div *ngIf="form.get('employee.id')?.invalid && form.get('employee.id')?.touched" class="error-message">
+          Employee Code is required.
+        </div>
+      </div>
+      <div class="form-group">
         <label for="name">Employee Name:</label>
         <input formControlName="name" id="name" type="text" placeholder="Enter employee name" />
         <div *ngIf="form.get('employee.name')?.invalid && form.get('employee.name')?.touched" class="error-message">
@@ -12,7 +19,7 @@
 
       <div class="form-group">
         <label for="email">Email:</label>
-        <input formControlName="email" id="email" type="text" placeholder="Enter email" />
+        <input formControlName="email" id="email" type="text" control="email" placeholder="Enter email" appEmailValidator />
         <div *ngIf="form.get('employee.email')?.invalid && form.get('employee.email')?.touched" class="error-message">
           Enter a valid email.
         </div>
@@ -20,7 +27,7 @@
 
       <div class="form-group">
         <label for="mobile">Mobile:</label>
-        <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number" />
+        <input formControlName="mobile" id="mobile" type="text" placeholder="Enter mobile number"/>
         <div *ngIf="form.get('employee.mobile')?.invalid && form.get('employee.mobile')?.touched" class="error-message">
           Enter a valid 10-digit mobile number.
         </div>
@@ -54,8 +61,6 @@
         </div>
       </div>
     </div>
-    <div class="buttons">
-      <button type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
-    </div>
+      <button type="submit" [disabled]="form.invalid" appEmailValidator>{{ isEditMode ? 'Update' : 'Add' }}</button>
   </form>
 </div>

@@ -29,9 +29,9 @@ export class CreateComponent {
 
 
   ngOnInit(){
-    this.empService.getEmployees().subscribe((data: Department[]) => {
-      this.department = data;
-    });;
+    // this.empService.getEmployees().subscribe((data: Department[]) => {
+    //   this.department = data;
+    // });;
   }
 
   onSubmit(Department:any){

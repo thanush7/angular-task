@@ -5,10 +5,10 @@
         <div class="search-container">
             <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search"/>
           </div>
-        <p-table [value]="filteredDepartment" class="custom-p-table " [paginator]="true" [rows]="row" [totalRecords]="filteredDepartment.length"> 
+        <p-table [value]="filteredDepartment" class="custom-p-table " [paginator]="true" [rows]="4" [lazy]="true" (onLazyLoad)="onPageChange($event)" [loading]="loading" [totalRecords]="totalRecords"> 
             <ng-template pTemplate="header">
                 <tr class="table-header">
-                    <th>Id</th>
+                    <th>Code</th>
                     <th>Name</th>
                     <th>View</th>
                     <th>Add</th>
