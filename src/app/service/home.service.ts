@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Department } from '../models/department.model';
@@ -13,11 +13,20 @@ export class HomeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployees(page: number, size: number): Observable<Department[]> {
-    const requestBody: EmployeeRequest = {page, size };
-    return this.http.post<any[]>(`${this.apiUrl}/allDepartment`,requestBody);
+  getEmployees(searchTerm: string, page: number, size: number, sortBy: string, direction: string): Observable<any> {
+    const params = {
+      page: page,
+      size: size,
+      sortBy: sortBy,
+      direction: direction,
+      searchTerm: searchTerm
+    };
+      return this.http.post<any>(`${this.apiUrl}/allDepartment`, params, {
+        headers: { 'Content-Type': 'application/json' }
+      });
   }
   deleteDepartment(id: string): Observable<any> {
+
     return this.http.delete(`${this.apiUrl}/department/${id}`); // Make sure the URL matches your API
   }
 }

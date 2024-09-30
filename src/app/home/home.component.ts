@@ -28,11 +28,15 @@ export class HomeComponent {
   selectedId!:string;
   createForm:boolean=false;
   departmentName="";
-  searchTerm!:string
   filteredDepartment:Department[]=[];
   row=5;
   totalRecords:number=0;
   loading:boolean=false;
+  searchTerm: string = '';
+  page: number = 0;
+  size: number = 4;
+  sortBy: string = 'name';
+  direction: string = 'ASC';
 
   // openEmployeeList(departmentId: number | undefined,departName:string) {
   //   this.selectedDepartmentId = departmentId;
@@ -46,32 +50,25 @@ export class HomeComponent {
     //   this.departments = data;
     //   this.filteredDepartment=data;
     // });
-    this.loadDepartment(0,4);
+    this.loadDepartment();
   }
-  onSearch() {
-    if (this.searchTerm) {
-      this.filteredDepartment = this.departments.filter(emp =>
-        emp.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    } else {
-      this.filteredDepartment = [...this.departments];
-    }
+  onSearch(): void {
+    this.page = 0; // Reset to the first page on new search
+    this.loadDepartment();
   }
-  loadDepartment(page: number, size: number){
+  loadDepartment(){
     this.loading = true;
-    this.homeService.getEmployees(page, size)
+    this.homeService.getEmployees(this.searchTerm, this.page, this.size, this.sortBy, this.direction)
       .subscribe((data:any) => {
         this.departments = data.content;
-        this.filteredDepartment = data.content;
         this.totalRecords = data.totalElements;
-        console.log(data);
         this.loading = false;
       });
   }
   onPageChange(event: any): void {
     const page = event.first / event.rows; // Calculate the current page
     const size = event.rows; // Get the number of records per page
-    this.loadDepartment(page, size);
+    this.loadDepartment();
   }
   deleteEmployeeList(DepartmentId:string){
     this.deleteDepartment(DepartmentId);
@@ -86,7 +83,6 @@ export class HomeComponent {
   }
 
   handleEmployeeAdded(employeeData: any) {
-    console.log('Employee added for department:', this.selectedDepartmentId, employeeData);
     this.showForm = false;
   }
 
@@ -109,8 +105,6 @@ export class HomeComponent {
           next: () => {
             // this.departments = this.departments.filter(department => (department.id).trim().toLowerCase() !== departmentId);
             this.departments = this.departments.filter(department => department.id?.trim().toLowerCase() !== departmentId.trim().toLowerCase());
-
-            console.log('Department deleted:', departmentId);
           },
           error: (error) => {
             console.error('Error deleting department:', error);

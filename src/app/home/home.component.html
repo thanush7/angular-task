@@ -5,7 +5,7 @@
         <div class="search-container">
             <input type="text" pInputText [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search"/>
           </div>
-        <p-table [value]="filteredDepartment" class="custom-p-table " [paginator]="true" [rows]="4" [lazy]="true" (onLazyLoad)="onPageChange($event)" [loading]="loading" [totalRecords]="totalRecords"> 
+        <p-table [value]="departments" class="custom-p-table " [paginator]="true" [rows]="4" [lazy]="true" (onPage)="onPageChange($event)" [loading]="loading" [totalRecords]="totalRecords"> 
             <ng-template pTemplate="header">
                 <tr class="table-header">
                     <th>Code</th>

@@ -24,7 +24,6 @@ export class DepartmenteditComponent {
   ngOnInit(){
     this.initForm();
     this.departmentId = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.departmentId);
     if(this.departmentId){
       this.isEditMode = true;
       this.service.getDeparmentById(this.departmentId)
@@ -83,7 +82,6 @@ export class DepartmenteditComponent {
       };
       this.service.updateDeparment(updatedDepartment.id,updatedDepartment).subscribe((res)=>{
         this.departmentAdded.emit(res); // Emit the new department to parent component
-        // console.log('Department updated successfully', res);
         this.showSuccessUpdate();
         this.closeForm();
       },

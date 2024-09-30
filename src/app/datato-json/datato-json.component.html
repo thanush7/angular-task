@@ -1,0 +1,10 @@
+<div class="container">
+    <h2>Upload JSON File</h2>
+
+    <form (submit)="onSubmit()">
+        <input type="file" (change)="onFileSelected($event)" accept=".json" />
+        <button type="submit">Upload</button>
+    </form>
+
+    <p *ngIf="message">{{ message }}</p>
+</div>

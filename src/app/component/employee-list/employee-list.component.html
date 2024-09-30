@@ -8,12 +8,14 @@
     </div>
 
     <div class="table-container">
-      <p-table [value]="filteredEmployees" [totalRecords]="totalRecords" [lazy]="true" [paginator]="true"   [rows]="4"
-        (onLazyLoad)="onPageChange($event)" [loading]="loading" class="custom-p-table p-datatable-responsive">
+      <p-table [value]="employees" [totalRecords]="totalRecords" [lazy]="true" [paginator]="true"   [rows]="rows"
+        (onLazyLoad)="onPageChange($event)" [loading]="loading"  [sortField]="sortField"
+        [sortOrder]="sortOrder"
+        (onSort)="onSortChange($event)" class="custom-p-table p-datatable-responsive">
 
         <ng-template pTemplate="header">
           <tr class="table-header">
-            <th>Id</th>
+            <th pSortableColumn="id">Employee ID <p-sortIcon field="id"></p-sortIcon></th>
             <th>Name</th>
             <th>Email</th>
             <th>Gender</th>

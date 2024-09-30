@@ -34,34 +34,51 @@ export class EmployeeListComponent implements OnChanges {
   isEditFormVisible: boolean = false;
   @Output() employeeAdded = new EventEmitter<any>();
 
-  rows = 5;
+  // rows = 5;
   totalRecords: number = 0;
 
   filteredEmployees: Employee[] = [];
   loading: boolean = true;
-  searchTerm: string = '';
+  searchTerm: string = '';  // Search term for employee ID
+  page: number = 0;
+  rows: number = 4;
+  sortField: string = 'id';
+  sortOrder: number = 1;
   departments: Department[] = [];
 
   ngOnInit() {
     this.departmentId = this.root.snapshot.paramMap.get('id')!;
-    this.loadEmployees(0,4);
+    this.loadEmployees();
   }
-
-  onSearch() {
-    if (this.searchTerm) {
-      this.filteredEmployees = this.employees.filter(emp =>
-        emp.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    } else {
-      this.filteredEmployees = [...this.employees];
-    }
-  }
-
 
   constructor(private employeeService: EmployeeService, private router: Router, private root: ActivatedRoute,private homeService:HomeService) {
 
   }
 
+
+  // onSearch() {
+  //   if (this.searchTerm) {
+  //     this.filteredEmployees = this.employees.filter(emp =>
+  //       emp.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //     );
+  //   } else {
+  //     this.filteredEmployees = [...this.employees];
+  //   }
+  // }
+
+  onSearch() {
+    this.page = 0; // Reset to first page on search
+    this.loadEmployees();
+  }
+
+  onSortChange(event: any) {
+    this.sortField = event.field;
+    this.sortOrder = event.order;
+    this.loadEmployees();
+  }
+
+
+ 
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,32 +88,27 @@ export class EmployeeListComponent implements OnChanges {
     }
   }
 
-  loadEmployees(page: number, size: number) {
+  loadEmployees() {
     this.loadDepartment();
     this.loading = true;
-    this.employeeService.getEmployeesByDepartment(this.departmentId,page, size)
+    this.employeeService.getEmployeesByDepartment(this.departmentId,this.page, this.rows,this.searchTerm,this.sortField,this.sortOrder)
       .subscribe((data:any) => {
         this.employees = data.content;
-        this.filteredEmployees = data.content;
         this.totalRecords = data.totalElements;
-        console.log(data);
         this.loading = false;
       });
   }
   onPageChange(event: any): void {
-    const page = event.first / event.rows; // Calculate the current page
-    const size = event.rows; // Get the number of records per page
-    this.loadEmployees(page, size);
+    this.page = event.first / event.rows; // Calculate the current page
+     this.rows = event.rows; // Get the number of records per page
+    this.loadEmployees();
   }
   loadDepartment()
   {
-    console.log('call', this.departmentId);
     if(this.departmentId){
        this.employeeService.getDepartmentName(this.departmentId).subscribe(
         (response)=>{
-          console.log('name');
           this.departName= response.name;
-          console.log(this.departName)
         },
         (error)=>{
           this.departName='';
@@ -114,9 +126,8 @@ export class EmployeeListComponent implements OnChanges {
   }
 
   onEmployeeUpdated(updatedEmployee: any) {
-    console.log('Employee updated:', updatedEmployee);
     // Refresh the employee list or update the view
-    this.loadEmployees(0,4);
+    this.loadEmployees();
     this.isEditFormVisible = false;  // Hide the form after updating
   }
   deleteEmployeeList(employeeId: string) {
@@ -124,7 +135,6 @@ export class EmployeeListComponent implements OnChanges {
   }
 
   gotoEdit(id: number) {
-    // console.log('Navigating to edit:', id, deptId);
     this.router.navigate(['employee/edit', id]);
   }
   deleteEmployee(departmentId: string) {
@@ -141,7 +151,7 @@ export class EmployeeListComponent implements OnChanges {
         this.employeeService.deleteDepartment(departmentId).subscribe({
           next: () => {
             this.employees = this.employees.filter(employee => employee.id !== departmentId);
-            this.loadEmployees(0,4);
+            this.loadEmployees();
           },
           error: (error) => {
             console.error('Error deleting department:', error);

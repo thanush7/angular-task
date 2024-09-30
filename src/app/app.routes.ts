@@ -5,6 +5,7 @@ import { SearchComponent } from './search/search.component';
 import { DepartmenteditComponent } from './departmentedit/departmentedit.component';
 import { AddEmployeeFormComponent } from './component/create-form/create-form.component';
 import { EmployeeListComponent } from './component/employee-list/employee-list.component';
+import { DatatoJsonComponent } from './datato-json/datato-json.component';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,9 @@ export const routes: Routes = [
     ,{
         path:'create/:id',
         component:AddEmployeeFormComponent
+    },{
+        path:'json',
+        component:DatatoJsonComponent
     }
 
 ];

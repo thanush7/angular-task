@@ -47,7 +47,7 @@ export class AddEmployeeFormComponent {
     });
     if (this.employeeId) {
       this.isEditMode = true;
-      this.employeeService.getEmployeeById(this.employeeId).subscribe((employee: any) => {
+      this.employeeService.getEmployee(this.employeeId).subscribe((employee: any) => {
         this.form.patchValue({
           employee: {
             id:this.employeeId,

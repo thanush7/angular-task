@@ -12,6 +12,6 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getEmployeesAndDepartment(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/whole`);
+    return this.http.post<any[]>(`${this.apiUrl}/whole`,{});
   }
 }

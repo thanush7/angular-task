@@ -13,18 +13,26 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) {}
 
-  getEmployeesByDepartment(departmentId: string,page: number, size: number): Observable<Employee[]> {
-    const params = new HttpParams()
+  getEmployeesByDepartment(departmentId: string,page: number, size: number,searchTerm?: string, sortField: string = 'id', sortOrder: number = 1): Observable<Employee[]> {
+    const sortOrderString = sortOrder === 1 ? 'asc' : 'desc';
+    let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('sortField', sortField)
+      .set('sortOrder', sortOrderString);
+
+      if (searchTerm) {
+        params = params.set('searchTerm', searchTerm);
+      }
+
       const requestBody: DepartmentEmployeeRequest = { departmentId, page, size };
-    return this.http.post<any[]>(`${this.apiUrl}/employee-by-department`,requestBody);
+    return this.http.post<any[]>(`${this.apiUrl}/employee-by-department`,{ departmentId }, { params });
   }
   addEmployee(id:string,employee: Employee): Observable<any> {
     return this.http.post(`${this.apiUrl}/create/${id}`, employee); 
   }
-  getEmployeeById(employeeId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/employees/${employeeId}`);
+  getEmployee(id: string): Observable<Employee> {
+    return this.http.post<Employee>(`${this.apiUrl}/employees`, id);
   }
 
   updateEmployee(employeeId: string, employeeData: any): Observable<any> {
@@ -47,7 +55,6 @@ export class EmployeeService {
     return this.http.delete(`${this.apiUrl}/${id}`); // Make sure the URL matches your API
   }
   getDepartmentName(id:string): Observable<{ name: string }> {
-    console.log(this.http.get<string>(`${this.apiUrl}/dep/${id}`));
     return this.http.get<{ name: string }>(`${this.apiUrl}/dep/${id}`);
   }
   
