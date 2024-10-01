@@ -12,17 +12,17 @@ import { FileuploadserviceService } from './fileuploadservice.service';
 })
 export class DatatoJsonComponent {
   message: string = '';
-  selectedFile: File | null = null; // Variable to hold the selected file
+  selectedFile: File | null = null; 
 
   constructor(private departmentService: FileuploadserviceService) {}
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0]; // Store the selected file
+    this.selectedFile = event.target.files[0]; 
   }
 
   onSubmit() {
     if (this.selectedFile) {
-      this.uploadFile(this.selectedFile); // Call uploadFile with the selected file
+      this.uploadFile(this.selectedFile); 
     } else {
       this.message = 'Please select a file first.';
     }

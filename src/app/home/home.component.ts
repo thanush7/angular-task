@@ -3,14 +3,13 @@ import { Component, Input, NgModule, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeService } from '../service/home.service';
 import { Department } from '../models/department.model';
-import { Employee } from '../models/employee.model';
 import { EmployeeListComponent } from '../component/employee-list/employee-list.component';
 import { AddEmployeeFormComponent } from '../component/create-form/create-form.component';
-import { CreateComponent } from '../department/create/create.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { CreateComponent } from '../department/create.component';
 
 @Component({
   selector: 'app-home',

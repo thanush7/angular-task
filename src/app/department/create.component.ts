@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EmployeeService } from '../../service/employee.service';
+import { FormsModule,  ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Department } from '../../models/department.model';
 import { RouterOutlet } from '@angular/router';
-import { HomeService } from '../../service/home.service';
+import { EmployeeService } from '../service/employee.service';
+import { HomeService } from '../service/home.service';
+import { Department } from '../models/department.model';
+
 
 @Component({
   selector: 'app-create',

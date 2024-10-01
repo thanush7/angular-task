@@ -3,7 +3,7 @@
     max-width: 600px;
     margin: 20px auto;
     padding: 50px;
-    background-color: #f7f9fc; /* Light background for a softer look */
+    background-color: #f7f9fc; 
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
@@ -11,7 +11,7 @@
 
 h2 {
     text-align: center;
-    color: #4a4e69; /* Darker shade for the heading */
+    color: #4a4e69; 
     margin-bottom: 20px;
     font-size: 26px;
 }
@@ -20,14 +20,14 @@ label {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
-    color: #22223b; /* A deep navy color for labels */
+    color: #22223b; 
 }
 
 input[type="text"] {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 15px;
-    border: 2px solid #c9d6e3; /* Soft border color */
+    border: 2px solid #c9d6e3; 
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease;
@@ -36,20 +36,20 @@ select{
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 15px;
-    border: 2px solid #c9d6e3; /* Soft border color */
+    border: 2px solid #c9d6e3; 
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease;
 }
 input[type="text"]:focus {
-    border-color: #9a8cfc; /* Soft purple on focus */
+    border-color: #9a8cfc; 
     outline: none;
 }
 
 button {
     width: 100%;
     padding: 14px;
-    background-color: #9a8cfc; /* Soft purple background */
+    background-color: #9a8cfc; 
     color: #ffffff;
     font-size: 16px;
     border: none;
@@ -60,7 +60,7 @@ button {
 }
 
 button:hover {
-    background-color: #7a5cbd; /* Darker purple on hover */
+    background-color: #7a5cbd; 
 }
 
 button:active {

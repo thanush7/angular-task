@@ -1,18 +1,17 @@
 .container {
-  background-color: #fff;  /* White background for the table */
+  background-color: #fff;  
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  width: 100%; /* Set container width */
-  max-width: 100%; /* Maximum width for larger screens */
-
+  width: 100%; 
+  max-width: 100%;
 }
 .table-container {
-  max-height: 300px; /* Set a maximum height for the table */
-  overflow-y: auto;  /* Enable vertical scrolling */
-  border: 1px solid #ddd; /* Optional: Add a border around the table */
-  margin-top: 10px;  /* Space above the table */
+  max-height: 300px; 
+  overflow-y: auto;  
+  border: 1px solid #ddd; 
+  margin-top: 10px;  
 }
 .table-header th {
   background-color: #1f61ad;
@@ -22,9 +21,8 @@
   font-size: 1.1em;
 }
 
-/* Table styling */
 .custom-p-table {
-  width: 100%; /* Table width within the container */
+  width: 100%;
   border-collapse: collapse;
  
 }
@@ -41,61 +39,59 @@
 }
 
 .table-row:nth-child(even) {
-  background-color: #f2f2f2; /* Alternating row color */
+  background-color: #f2f2f2; 
 }
 
-/* Icon styling */
 .table-icon {
   font-size: 1.2em;
   cursor: pointer;
-  transition: transform 0.2s, color 0.2s; /* Smooth hover effect */
+  transition: transform 0.2s, color 0.2s;
 }
 
 .view-icon {
-  color: #007bff; /* Blue color for 'View' */
+  color: #007bff; 
 }
 
 .add-icon {
-  color: #28a745; /* Green color for 'Add' */
+  color: #28a745;
 }
 
 .update-icon {
-  color: #ffc107; /* Yellow color for 'Update' */
+  color: #ffc107;
 }
 
 .delete-icon {
-  color: #dc3545; /* Red color for 'Delete' */
+  color: #dc3545; 
 }
 
-/* Hover effects */
+
 .table-icon:hover {
-  transform: scale(1.2); /* Slightly increase icon size on hover */
+  transform: scale(1.2); 
 }
 
 .view-icon:hover {
-  color: #0056b3; /* Darker blue on hover */
+  color: #0056b3; 
 }
 
 .add-icon:hover {
-  color: #218838; /* Darker green on hover */
+  color: #218838;
 }
 
 .update-icon:hover {
-  color: #e0a800; /* Darker yellow on hover */
+  color: #e0a800; 
 }
 
 .delete-icon:hover {
-  color: #c82333; /* Darker red on hover */
+  color: #c82333; 
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .container {
-      width: 95%; /* Take almost full width on smaller screens */
+      width: 95%; 
   }
 
   .custom-p-table {
-      font-size: 0.85em; /* Slightly smaller font for smaller screens */
+      font-size: 0.85em; 
   }
 
   .table-header th, .table-row td {
@@ -103,7 +99,7 @@
   }
 
   .table-icon {
-      font-size: 1em; /* Adjust icon size for mobile */
+      font-size: 1em; 
   }
 }
 .search-container input{
@@ -130,17 +126,6 @@
   margin-right: 120px;
 }
 
-
-/* button[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-} */
 button {
   background-color: #007bff;
   color: #fff;

@@ -12,7 +12,7 @@ import { MobileValidatorDirective } from '../../validators/mobile-validator.dire
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,EmailValidatorDirective,MobileValidatorDirective]
+  imports: [CommonModule,ReactiveFormsModule,EmailValidatorDirective,MobileValidatorDirective]
 })
 export class AddEmployeeFormComponent {
   form: FormGroup;
@@ -29,7 +29,7 @@ export class AddEmployeeFormComponent {
       employee: this.fb.group({
         id:['',Validators.required],
         name: ['', Validators.required],
-        email: ['', Validators.required], // Email validator
+        email: ['', Validators.required],
         mobile: ['', Validators.required],
         gender: ['', Validators.required],
         city: ['', Validators.required],
@@ -38,9 +38,6 @@ export class AddEmployeeFormComponent {
 
   }
   ngOnInit() {
-
-    // this.departmentId = +this.route.snapshot.paramMap.get('id')!;
-
     this.route.params.subscribe(params => {
       this.employeeId = params['employeeId'];
       this.departId = params['id'];
@@ -59,7 +56,6 @@ export class AddEmployeeFormComponent {
           },
         });
       });
-      // console.log(employee)
     }
 
   }
@@ -90,7 +86,6 @@ export class AddEmployeeFormComponent {
           ...this.form.value.employee
         }).subscribe(
           (res) => {
-            // this.employeeAdded.emit(res);
             this.showSuccessUpdate()
             this.root.navigate(['/employeelist']);
           }, error => {
@@ -102,11 +97,7 @@ export class AddEmployeeFormComponent {
     else {
       this.employeeService.addEmployee(this.departId, this.form.value.employee).subscribe(
         (res) => {
-          // alert('called1');
-          // this.employeeAdded.emit(res);
-          // console.log('added succes',res);
           this.showSuccessAlert();
-          // this.root.navigate(['/employeelist']);
         }, error => {
           console.error('error', error)
         }

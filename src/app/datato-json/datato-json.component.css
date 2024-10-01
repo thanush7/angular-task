@@ -1,4 +1,3 @@
-/* app.component.css */
 .container {
     max-width: 600px;
     margin: 50px auto;
@@ -49,6 +48,6 @@ button:hover {
 
 p {
     text-align: center;
-    color: #28a745; /* Green color for success message */
+    color: #28a745; 
     font-weight: bold;
 }

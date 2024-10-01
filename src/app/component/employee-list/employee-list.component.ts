@@ -5,13 +5,9 @@ import { AddEmployeeFormComponent } from '../create-form/create-form.component';
 import { FormsModule } from '@angular/forms';
 import { Employee } from '../../models/employee.model';
 import { TableModule } from 'primeng/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import {MatPaginatorModule } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { filter } from 'rxjs/operators';
-import { color } from 'html2canvas/dist/types/css/types/color';
 import { HomeService } from '../../service/home.service';
 import { Department } from '../../models/department.model';
 
@@ -39,7 +35,7 @@ export class EmployeeListComponent implements OnChanges {
 
   filteredEmployees: Employee[] = [];
   loading: boolean = true;
-  searchTerm: string = '';  // Search term for employee ID
+  searchTerm: string = ''; 
   page: number = 0;
   rows: number = 4;
   sortField: string = 'id';
@@ -56,18 +52,9 @@ export class EmployeeListComponent implements OnChanges {
   }
 
 
-  // onSearch() {
-  //   if (this.searchTerm) {
-  //     this.filteredEmployees = this.employees.filter(emp =>
-  //       emp.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //     );
-  //   } else {
-  //     this.filteredEmployees = [...this.employees];
-  //   }
-  // }
 
   onSearch() {
-    this.page = 0; // Reset to first page on search
+    this.page = 0; 
     this.loadEmployees();
   }
 
@@ -83,8 +70,6 @@ export class EmployeeListComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['departmentId'] && this.departmentId) {
-      // this.loadEmployees(0,this.rows);
-      // this.loadDepartment();
     }
   }
 
@@ -99,8 +84,8 @@ export class EmployeeListComponent implements OnChanges {
       });
   }
   onPageChange(event: any): void {
-    this.page = event.first / event.rows; // Calculate the current page
-     this.rows = event.rows; // Get the number of records per page
+    this.page = event.first / event.rows; 
+     this.rows = event.rows; 
     this.loadEmployees();
   }
   loadDepartment()
@@ -122,13 +107,12 @@ export class EmployeeListComponent implements OnChanges {
   editEmployee(employeeId: string, departId: string) {
     this.selectedEmployeeId = employeeId;
     this.selectedDepartmentId = departId;
-    this.isEditFormVisible = true; // Show the form when an employee is selected
+    this.isEditFormVisible = true; 
   }
 
   onEmployeeUpdated(updatedEmployee: any) {
-    // Refresh the employee list or update the view
     this.loadEmployees();
-    this.isEditFormVisible = false;  // Hide the form after updating
+    this.isEditFormVisible = false;  
   }
   deleteEmployeeList(employeeId: string) {
     this.deleteEmployee(employeeId);
